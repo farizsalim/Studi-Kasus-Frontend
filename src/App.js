@@ -1,23 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import HomePage from './page/Home';
+import { Provider } from 'react-redux';
+import store from './app/store'
+import Navbar from './app/components/Navbar';
+import React, { useState } from 'react';
+import Cart from './page/cart';
+import Login from './page/Auth/login';
+import Logout from './page/Auth/logout';
+import Register from './page/Auth/register';
+import UserPage from './page/User';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage/>}
+            />
+            <Route
+              path="/cart"
+              element={<Cart/>}
+            />
+            <Route
+              path="/login"
+              element={<Login/>}
+            />
+            <Route
+              path="/logout"
+              element={<Logout/>}
+            />
+            <Route
+              path="/register"
+              element={<Register/>}
+            />
+            <Route
+              path="/user"
+              element={<UserPage/>}
+            />
+          </Routes>
+        </Router>
+      </Provider>
     </div>
   );
 }
