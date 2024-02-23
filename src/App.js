@@ -4,7 +4,7 @@ import HomePage from './page/Home';
 import { Provider } from 'react-redux';
 import store from './app/store'
 import Navbar from './app/components/Navbar';
-import React, { useState } from 'react';
+import React from 'react';
 import Cart from './page/cart';
 import Login from './page/Auth/login';
 import Logout from './page/Auth/logout';
