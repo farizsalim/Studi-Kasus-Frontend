@@ -20,21 +20,19 @@ export const createAddress = async (data) => {
 };
 
 export const getLocationData = async (level, parentId = null) => {
-  const { token } = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {};
-
-  let url = `https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`;
+  let url;
 
   if (level === 'kabupaten') {
-    url = `https://api.goapi.io/regional/kota?api_key=40e7b035-5254-576c-9dbd-dc50b129&provinsi_id=${parentId}`;
+    url = `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${parentId}.json`;
   } else if (level === 'kecamatan') {
-    url = `https://api.goapi.io/regional/kecamatan?api_key=40e7b035-5254-576c-9dbd-dc50b129&kota_id=${parentId}`;
+    url = `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${parentId}.json`;
   } else if (level === 'kelurahan') {
-    url = `https://api.goapi.io/regional/kelurahan?api_key=40e7b035-5254-576c-9dbd-dc50b129&kecamatan_id=${parentId}`;
+    // Use the new URL for fetching village data based on district ID
+    url = `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${parentId}.json`;
+  } else {
+    // Use the new URL for fetching province data
+    url = 'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json';
   }
 
-  return await axios.get(url, {
-    headers: {
-      authorization: `Bearer ${token}`
-    }
-  });
+  return await axios.get(url);
 };

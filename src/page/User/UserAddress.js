@@ -16,6 +16,7 @@ const UserAddress = () => {
   const [provinces, setProvinces] = useState([]);
   const [regencies, setRegencies] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [kelurahans, setKelurahans] = useState([]);
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -58,10 +59,40 @@ const UserAddress = () => {
     }
   };
 
+  const handleKecamatanChange = async (kecamatanId) => {
+    try {
+      const response = await getLocationData('kelurahan', kecamatanId);
+      setKelurahans(response.data);
+    } catch (error) {
+      console.error('Error fetching kelurahans:', error);
+    }
+  };
+
   const handleCreateAddress = async () => {
     try {
-      const response = await createAddress(newAddress);
+      // Extract names from the selected IDs
+      const province = provinces.find((p) => p.id === newAddress.provinsi);
+      const regency = regencies.find((r) => r.id === newAddress.kabupaten);
+      const district = districts.find((d) => d.id === newAddress.kecamatan);
+      const kelurahan = kelurahans.find((k) => k.id === newAddress.kelurahan);
+  
+      // Create a new address object with names
+      const newAddressWithNames = {
+        nama: newAddress.nama,
+        provinsi: province ? province.name : '',
+        kabupaten: regency ? regency.name : '',
+        kecamatan: district ? district.name : '',
+        kelurahan: kelurahan ? kelurahan.name : '',
+        detail: newAddress.detail,
+      };
+  
+      // Send the new object with names to the API
+      const response = await createAddress(newAddressWithNames);
+  
+      // Update the state with the new address
       setUserAddresses([...userAddresses, response.data]);
+  
+      // Clear the form fields
       setNewAddress({
         nama: '',
         kelurahan: '',
@@ -70,7 +101,7 @@ const UserAddress = () => {
         provinsi: '',
         detail: '',
       });
-
+  
       Swal.fire({
         icon: 'success',
         title: 'Address Added',
@@ -129,63 +160,74 @@ const UserAddress = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="kelurahan">Kelurahan:</label>
-            <input
-              type="text"
-              id="kelurahan"
-              className="form-control"
-              value={newAddress.kelurahan}
-              onChange={(e) => setNewAddress({ ...newAddress, kelurahan: e.target.value })}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="provinsi">Provinsi:</label>
-            <select
-              id="provinsi"
-              className="form-control"
-              value={newAddress.provinsi}
-              onChange={(e) => {
-                setNewAddress({ ...newAddress, provinsi: e.target.value });
-                handleProvinceChange(e.target.value);
-              }}
-            >
-              <option value="" disabled>Select Province</option>
-              {provinces.map((province) => (
-                <option key={province.id} value={province.id}>{province.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="kabupaten">Kabupaten:</label>
-            <select
-              id="kabupaten"
-              className="form-control"
-              value={newAddress.kabupaten}
-              onChange={(e) => {
-                setNewAddress({ ...newAddress, kabupaten: e.target.value });
-                handleRegencyChange(e.target.value);
-              }}
-            >
-              <option value="" disabled>Select Regency</option>
-              {regencies.map((regency) => (
-                <option key={regency.id} value={regency.id}>{regency.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="kecamatan">Kecamatan:</label>
-            <select
-              id="kecamatan"
-              className="form-control"
-              value={newAddress.kecamatan}
-              onChange={(e) => setNewAddress({ ...newAddress, kecamatan: e.target.value })}
-            >
-              <option value="" disabled>Select District</option>
-              {districts.map((district) => (
-                <option key={district.id} value={district.id}>{district.name}</option>
-              ))}
-            </select>
-          </div>
+      <label htmlFor="provinsi">Provinsi:</label>
+      <select
+        id="provinsi"
+        className="form-control"
+        value={newAddress.provinsi}
+        onChange={(e) => {
+          setNewAddress({ ...newAddress, provinsi: e.target.value });
+          handleProvinceChange(e.target.value);
+        }}
+      >
+        <option value="" disabled>Pilih Provinsi</option>
+        {provinces.map((province) => (
+          <option key={province.id} value={province.id}>{province.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="kabupaten">Kabupaten/Kota:</label>
+      <select
+        id="kabupaten"
+        className="form-control"
+        value={newAddress.kabupaten}
+        onChange={(e) => {
+          setNewAddress({ ...newAddress, kabupaten: e.target.value });
+          handleRegencyChange(e.target.value);
+        }}
+      >
+        <option value="" disabled>Pilih Kabupaten/Kota</option>
+        {regencies.map((regency) => (
+          <option key={regency.id} value={regency.id}>{regency.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="kecamatan">Kecamatan:</label>
+      <select
+        id="kecamatan"
+        className="form-control"
+        value={newAddress.kecamatan}
+        onChange={(e) => {
+          setNewAddress({ ...newAddress, kecamatan: e.target.value });
+          handleKecamatanChange(e.target.value);
+        }}
+      >
+        <option value="" disabled>Pilih Kecamatan</option>
+        {districts.map((district) => (
+          <option key={district.id} value={district.id}>{district.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="kelurahan">Kelurahan:</label>
+      <select
+        id="kelurahan"
+        className="form-control"
+        value={newAddress.kelurahan}
+        onChange={(e) => setNewAddress({ ...newAddress, kelurahan: e.target.value })}
+      >
+        <option value="" disabled>Pilih Kelurahan</option>
+        {kelurahans.map((kelurahan) => (
+          <option key={kelurahan.id} value={kelurahan.id}>{kelurahan.name}</option>
+        ))}
+      </select>
+    </div>
+
           <div className="form-group">
             <label htmlFor="detail">Detail:</label>
             <textarea

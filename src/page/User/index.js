@@ -35,19 +35,38 @@ const UserPage = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2>User Page</h2>
-      <nav>
-        <button onClick={() => setActiveContent('profile')}>Profile</button>
-        <button onClick={() => setActiveContent('address')}>Address</button>
-        <button onClick={() => setActiveContent('orders')}>Orders</button>
+      <nav className="mb-3">
+        <button
+          className={`btn ${activeContent === 'profile' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setActiveContent('profile')}
+        >
+          Profile
+        </button>
+        <button
+          className={`btn ${activeContent === 'address' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setActiveContent('address')}
+        >
+          Address
+        </button>
+        <button
+          className={`btn ${activeContent === 'orders' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setActiveContent('orders')}
+        >
+          Orders
+        </button>
       </nav>
 
-      {user ? (
-        renderContent()
-      ) : (
-        <p>Loading user data...</p>
-      )}
+      <div className="card">
+        <div className="card-body">
+          {user ? (
+            renderContent()
+          ) : (
+            <p className="card-text">Loading user data...</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
