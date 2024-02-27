@@ -22,7 +22,7 @@ export const createAddress = async (data) => {
 export const getLocationData = async (level, parentId = null) => {
   const { token } = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {};
 
-  let url = `https://api.goapi.io/regional/provinsi?api_key=40e7b035-5254-576c-9dbd-dc50b129`;
+  let url = `https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`;
 
   if (level === 'kabupaten') {
     url = `https://api.goapi.io/regional/kota?api_key=40e7b035-5254-576c-9dbd-dc50b129&provinsi_id=${parentId}`;
