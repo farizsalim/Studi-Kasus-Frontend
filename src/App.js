@@ -10,6 +10,7 @@ import Login from './page/Auth/login';
 import Logout from './page/Auth/logout';
 import Register from './page/Auth/register';
 import UserPage from './page/User';
+import OrderPage from './page/Order';
 
 function App() {
 
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/user"
               element={<UserPage/>}
+            />
+            <Route
+              path="/order"
+              element={<OrderPage/>}
             />
           </Routes>
         </Router>

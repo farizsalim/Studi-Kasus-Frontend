@@ -9,8 +9,12 @@ import withReactContent from 'sweetalert2-react-content';
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.user !== null);
   const user = useSelector((state) => state.auth.user);
+  const cartItems = useSelector((state) => state.cart); // Ambil cart dari Redux store
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Hitung jumlah item di keranjang
+  const cartQty = cartItems.reduce((total, item) => total + item.qty, 0);
 
   const handleLogout = () => {
     const MySwal = withReactContent(Swal);
@@ -42,7 +46,7 @@ const Navbar = () => {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/cart">
-              Cart
+              Cart {cartQty > 0 && <span>({cartQty})</span>}
             </Link>
           </li>
 
@@ -51,7 +55,6 @@ const Navbar = () => {
               <Link className="nav-link" to="/user">
                 {user.full_name}
               </Link>
-
             </li>
           ) : (
             <>

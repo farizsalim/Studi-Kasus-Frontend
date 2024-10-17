@@ -5,9 +5,9 @@ import productReducer from "./features/Product/reducer";
 import { thunk } from "redux-thunk";
 
 let rootReducer = combineReducers({
-    auth: authReducer,
-    cart: cartReducer,
-    products: productReducer,
+  auth: authReducer,
+  cart: cartReducer,
+  products: productReducer,
 });
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__|| compose;

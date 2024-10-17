@@ -1,0 +1,55 @@
+.cart-page {
+    background: linear-gradient(to bottom, #7b2ff7, #f107a3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: white;
+    display: flex;
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+    min-height: 92vh; /* Menjamin tinggi minimum full viewport */
+    padding: 20px; /* Padding untuk isi konten */
+  }
+  
+  .cart-summary {
+    margin-top: auto; /* Menghimpun bagian ringkasan ke bawah */
+  }
+  
+  
+  .cart-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .cart-table {
+    background-color: rgba(255, 255, 255, 0.1); /* Set transparan */
+    color: white; /* Set warna teks */
+  }
+  
+  .cart-item-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .cart-item-qty {
+    width: 60px;
+  }
+  
+  .cart-remove-btn, .cart-clear-btn, .cart-checkout-btn, .cart-back-btn {
+    border-radius: 20px; /* Rounded buttons */
+    transition: background-color 0.3s ease;
+  }
+  
+  .cart-remove-btn:hover {
+    background-color: rgba(255, 0, 0, 0.7); /* Hover effect for remove button */
+  }
+  
+  .cart-clear-btn:hover {
+    background-color: rgba(255, 165, 0, 0.7); /* Hover effect for clear cart button */
+  }
+  
+  .cart-checkout-btn:hover {
+    background-color: rgba(0, 255, 0, 0.7); /* Hover effect for checkout button */
+  }
+  
+  .cart-back-btn:hover {
+    background-color: rgba(0, 0, 255, 0.7); /* Hover effect for back button */
+  }
+  

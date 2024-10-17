@@ -1,0 +1,9 @@
+.layer {
+    background: linear-gradient(to bottom, #7b2ff7, #f107a3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: white;
+    display: flex;
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+    min-height: 92vh; /* Menjamin tinggi minimum full viewport */
+    padding: 20px; /* Padding untuk isi konten */
+  }

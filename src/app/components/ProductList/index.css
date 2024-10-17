@@ -1,0 +1,49 @@
+/* Style for category buttons in ProductList */
+.productlist-btn-group .productlist-btn {
+    background-color: #7b2ff7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.productlist-btn-group .productlist-btn.active, .productlist-btn-group .productlist-btn:hover {
+    background-color: #5d1cc4;
+    box-shadow: 0 8px 15px rgba(123, 47, 247, 0.3);
+}
+
+.productlist-btn-group .productlist-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(123, 47, 247, 0.5);
+}
+
+/* Adjust spacing between buttons */
+.productlist-btn-group .productlist-btn + .productlist-btn {
+    margin-left: 10px;
+}
+
+/* Style for input in ProductList */
+.productlist-input-group .productlist-input {
+    border-radius: 25px;
+    padding: 10px 20px;
+    border: 2px solid #7b2ff7;
+    transition: border-color 0.3s ease;
+}
+
+.productlist-input-group .productlist-input:focus {
+    border-color: #5d1cc4;
+    box-shadow: 0 4px 8px rgba(123, 47, 247, 0.2);
+}
+
+/* General styling for ProductList */
+.productlist-container {
+    background-color: rgb(199, 199, 199);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+}
+

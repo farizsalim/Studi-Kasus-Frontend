@@ -1,0 +1,12 @@
+.title{
+    padding: 10px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.background{
+    display: flex;
+    background: linear-gradient(to bottom, #7b2ff7, #f107a3);
+}

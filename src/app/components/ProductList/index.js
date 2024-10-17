@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getProduct } from '../../api/products'; // Update the path accordingly
 import ProductCard from '../ProductCard/index';
+import "./index.css"
+import '../../../page/spinner.css'
 
 const ProductList = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -41,32 +43,31 @@ const ProductList = () => {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="container">
+    <div className="productlist-container">
       <div className="row justify-content-center">
         {/* Category filter buttons */}
-        <div className="btn-group mb-4">
+        <div className="productlist-btn-group mb-4">
           <button
             type="button"
-            className={`btn btn-outline-primary ${selectedCategory === 'All' ? 'active' : ''}`}
+            className={`productlist-btn btn-outline-primary ${selectedCategory === 'All' ? 'active' : ''}`}
             onClick={() => setSelectedCategory('All')}
           >
             All
           </button>
           <button
             type="button"
-            className={`btn btn-outline-primary ${selectedCategory === 'Food' ? 'active' : ''}`}
+            className={`productlist-btn btn-outline-primary ${selectedCategory === 'Food' ? 'active' : ''}`}
             onClick={() => setSelectedCategory('Food')}
           >
             Food
           </button>
           <button
             type="button"
-            className={`btn btn-outline-primary ${selectedCategory === 'Drink' ? 'active' : ''}`}
+            className={`productlist-btn btn-outline-primary ${selectedCategory === 'Drink' ? 'active' : ''}`}
             onClick={() => setSelectedCategory('Drink')}
           >
             Drink
           </button>
-          {/* Add more category buttons as needed */}
         </div>
 
         {/* Search input */}
@@ -78,18 +79,14 @@ const ProductList = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="button" onClick={filterProducts}>
-              Search
-            </button>
-          </div>
         </div>
       </div>
 
       <div className="row justify-content-center">
-        {/* Render filtered products or loading message */}
         {loading ? (
-          <p>Loading...</p>
+          <div className="spinner-container1">
+            <div className="lds-dual-ring"></div>
+          </div>
         ) : (
           filteredProducts.map((product) => (
             <div key={product._id} className="col-md-3 mb-4">

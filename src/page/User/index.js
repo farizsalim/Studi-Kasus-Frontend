@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserProfile from './UserProfile';
 import UserOrders from './UserOrders';
 import UserAddress from './UserAddress';
+import "./index.css"
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -28,43 +29,45 @@ const UserPage = () => {
       case 'orders':
         return <UserOrders orders={orders} />;
       case 'address':
-        return <UserAddress address={address} />;
+        return <UserAddress address={address} user={user} />; // Kirimkan juga user ke UserAddress
       default:
         return null;
     }
   };
 
   return (
-    <div className="container mt-4">
-      <h2>User Page</h2>
-      <nav className="mb-3">
-        <button
-          className={`btn ${activeContent === 'profile' ? 'btn-primary' : 'btn-secondary'}`}
-          onClick={() => setActiveContent('profile')}
-        >
-          Profile
-        </button>
-        <button
-          className={`btn ${activeContent === 'address' ? 'btn-primary' : 'btn-secondary'}`}
-          onClick={() => setActiveContent('address')}
-        >
-          Address
-        </button>
-        <button
-          className={`btn ${activeContent === 'orders' ? 'btn-primary' : 'btn-secondary'}`}
-          onClick={() => setActiveContent('orders')}
-        >
-          Orders
-        </button>
-      </nav>
+    <div className='layer'>
+      <div className="container mt-4">
+        <h2>User Page</h2>
+        <nav className="mb-3">
+          <button
+            className={`btn ${activeContent === 'profile' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveContent('profile')}
+          >
+            Profile
+          </button>
+          <button
+            className={`btn ${activeContent === 'address' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveContent('address')}
+          >
+            Address
+          </button>
+          <button
+            className={`btn ${activeContent === 'orders' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveContent('orders')}
+          >
+            Orders
+          </button>
+        </nav>
 
-      <div className="card">
-        <div className="card-body">
-          {user ? (
-            renderContent()
-          ) : (
-            <p className="card-text">Loading user data...</p>
-          )}
+        <div className="card">
+          <div className="card-body">
+            {user ? (
+              renderContent()
+            ) : (
+              <p className="card-text">Loading user data...</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
